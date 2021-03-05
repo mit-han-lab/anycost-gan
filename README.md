@@ -1,32 +1,28 @@
-# Anycost GANs for Interactive Image Synthesis and Editing
+# Anycost GAN
 
 ### [video](https://youtu.be/_yEziPl9AkM) | [paper](https://arxiv.org/abs/2103.03243) | [website](https://hanlab.mit.edu/projects/anycost-gan/) [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mit-han-lab/anycost-gan/blob/master/notebooks/intro_colab.ipynb)
 
-**Anycost GANs for Interactive Image Synthesis and Editing**
+[Anycost GANs for Interactive Image Synthesis and Editing](https://arxiv.org/abs/2103.03243)
 
 [Ji Lin](http://linji.me/), [Richard Zhang](https://richzhang.github.io/), Frieder Ganz, [Song Han](https://songhan.mit.edu/), [Jun-Yan Zhu](https://www.cs.cmu.edu/~junyanz/)
 
-In CVPR 2021
+MIT, Adobe Research, CMU
 
-**Anycost GAN (flexible)** generates consistent outputs under various, fine-grained computation budgets.
+In CVPR 2021
 
 ![flexible](https://hanlab.mit.edu/projects/anycost-gan/images/flexible.gif)
 
+Anycost GAN generates consistent outputs under various computational budgets.
 
 
-**Anycost GAN (uniform)** supports 4 resolutions and 4 channel ratios.
-
-![uniform](https://hanlab.mit.edu/projects/anycost-gan/images/uniform.gif)
-
-
-
-We can use the anycost generator for **interactive image editing**. A full generator takes **~3s** to render an image, which is too slow for editing. While with anycost generator, we can provide a visually similar preview at **5x faster speed**. After adjustment, we hit the "Finalize" button to give the high-qaulity, edited output. Check [here](https://youtu.be/_yEziPl9AkM?t=90) for the full demo.
 
 <a href="https://youtu.be/_yEziPl9AkM?t=90"><img src='assets/figures/demo.gif' width=600></a>
 
+We can use the anycost generator for **interactive image editing**. A full generator takes **~3s** to render an image, which is too slow for editing. While with anycost generator, we can provide a visually similar preview at **5x faster speed**. After adjustment, we hit the "Finalize" button to give the high-qaulity, edited output. Check [here](https://youtu.be/_yEziPl9AkM?t=90) for the full demo.
 
 
-## Method
+
+## Overview
 
 Anycost generators can be run at *diverse computation costs* by using different *channel* and *resolution* configurations. Sub-generators achieve high output consistency compared to the full generator, providng a fast preview.
 
@@ -37,6 +33,22 @@ Anycost generators can be run at *diverse computation costs* by using different 
 With (1) Sampling-based multi-resolution training; (2) adaptive-channel training; (3) generator-conditioned discriminator, we can achieve high image quality and consistency at different resolutions and channels.
 
 ![method](https://hanlab.mit.edu/projects/anycost-gan/images/method_pad.gif)
+
+## Results
+
+Anycost GAN (uniform channel version) supports 4 resolutions and 4 channel ratios, producing visually consistent images at different qualities.
+
+![uniform](https://hanlab.mit.edu/projects/anycost-gan/images/uniform.gif)
+
+
+
+The consistency retains during image projection and editing:
+
+![](https://hanlab.mit.edu/projects/anycost-gan/images/teaser.jpg)
+
+![](https://hanlab.mit.edu/projects/anycost-gan/images/editing.jpg)
+
+
 
 ## Usage
 
@@ -225,6 +237,12 @@ If you use this code for your research, please cite our paper.
   year      = {2021},
 }
 ```
+
+
+
+## Related Projects
+
+**[GAN Compression](https://github.com/mit-han-lab/gan-compression) | [Once for All](https://github.com/mit-han-lab/once-for-all) | [iGAN](https://github.com/junyanz/iGAN) | [StyleGAN2](https://github.com/NVlabs/stylegan2)**
 
 
 
