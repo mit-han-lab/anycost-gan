@@ -12,31 +12,32 @@ In CVPR 2021
 
 ![flexible](https://hanlab.mit.edu/projects/anycost-gan/images/flexible.gif)
 
-Anycost GAN generates consistent outputs under various computational budgets.
 
+Inspired by quick preview features in modern rendering software, we propose Anycost GAN, an unconditional GANs acceleration method, for fast image synthesis and editing. Anycost GAN generates consistent outputs under various computational budgets.  When deployed on desktop CPUs and edge devices, our model can provide perceptually similar results at 6-12x speedup, enabling interactive editing.
 
+## Demo
 
 <a href="https://youtu.be/_yEziPl9AkM?t=90"><img src='assets/figures/demo.gif' width=600></a>
 
-We can use the anycost generator for **interactive image editing**. A full generator takes **~3s** to render an image, which is too slow for editing. While with anycost generator, we can provide a visually similar preview at **5x faster speed**. After adjustment, we hit the "Finalize" button to give the high-qaulity, edited output. Check [here](https://youtu.be/_yEziPl9AkM?t=90) for the full demo.
+Here, we can use the Anycost generator for **interactive image editing**. A full generator takes **~3s** to render an image, which is too slow for editing. While with Anycost generator, we can provide a visually similar preview at **5x faster speed**. After adjustment, we hit the "Finalize" button to synthesize the high-quality final output. Check [here](https://youtu.be/_yEziPl9AkM?t=90) for the full demo.
 
 
 
 ## Overview
 
-Anycost generators can be run at *diverse computation costs* by using different *channel* and *resolution* configurations. Sub-generators achieve high output consistency compared to the full generator, providng a fast preview.
+Anycost generators can be run at *diverse computation costs* by using different *channel* and *resolution* configurations. Sub-generators achieve high output consistency compared to the full generator, providing a fast preview.
 
 ![overview](https://hanlab.mit.edu/projects/anycost-gan/images/overall.jpg)
 
 
 
-With (1) Sampling-based multi-resolution training; (2) adaptive-channel training; (3) generator-conditioned discriminator, we can achieve high image quality and consistency at different resolutions and channels.
+With (1) Sampling-based multi-resolution training, (2) adaptive-channel training, and (3) generator-conditioned discriminator, we achieve high image quality and consistency at different resolutions and channels.
 
 ![method](https://hanlab.mit.edu/projects/anycost-gan/images/method_pad.gif)
 
 ## Results
 
-Anycost GAN (uniform channel version) supports 4 resolutions and 4 channel ratios, producing visually consistent images at different qualities.
+Anycost GAN (uniform channel version) supports 4 resolutions and 4 channel ratios, producing visually consistent images with different image fidelity.
 
 ![uniform](https://hanlab.mit.edu/projects/anycost-gan/images/uniform.gif)
 
@@ -61,15 +62,15 @@ git clone https://github.com/mit-han-lab/anycost-gan.git
 cd anycost-gan
 ```
 
-- Install PyTorch 1.7 and other dependancies.
+- Install PyTorch 1.7 and other dependeinces.
 
-We recommend setting up the environment using anaconda: `conda env create -f environment.yml`
+We recommend setting up the environment using Anaconda: `conda env create -f environment.yml`
 
 
 
 ### Introduction Notebook
 
-We provide a jupyter notebook example to show how to use the anycost generator for image synthesis at diverse costs: `notebooks/intro.ipynb`. 
+We provide a jupyter notebook example to show how to use the anycost generator for image synthesis at diverse costs: `notebooks/intro.ipynb`.
 
 We also provide a colab version of the notebook: [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mit-han-lab/anycost-gan/blob/master/notebooks/intro_colab.ipynb). Be sure to select the GPU as the accelerator in runtime options.
 
@@ -96,7 +97,7 @@ import model
 
 pretrained_type = 'generator'  # choosing from ['generator', 'encoder', 'boundary']
 config_name = 'anycost-ffhq-config-f'  # replace the config name for other models
-model.get_pretrained(pretrained_type, config=config_name) 
+model.get_pretrained(pretrained_type, config=config_name)
 ```
 
 We also provide the face attribute classifier (which is general for different generators) for computing the editing directions. You can get it by running:
@@ -109,7 +110,7 @@ The attribute classifier takes in the face images in FFHQ format.
 
 
 
-After loading the anycost generator, we can run it at diverse cost. For example:
+After loading the Anycost generator, we can run it at a wide range of computational costs. For example:
 
 ```python
 from model.dynamic_channel import set_uniform_channel_ratio, reset_generator
@@ -121,7 +122,7 @@ out, _ = g(...)  # generate image
 reset_generator(g)  # restore the generator
 ```
 
-For a detailed usage and *flexible-channel* anycost generator, please refer to `notebooks/intro.ipynb`.
+For detailed usage and *flexible-channel* anycost generator, please refer to `notebooks/intro.ipynb`.
 
 
 
@@ -129,7 +130,7 @@ For a detailed usage and *flexible-channel* anycost generator, please refer to `
 
 Currently, we provide the following pre-trained generators, encoders, and editing directions. We will add more in the future.
 
-For anycost generators, by default, we refer to the uniform setting.
+For Anycost generators, by default, we refer to the uniform setting.
 
 | config name                    | generator          | encoder            | edit direction     |
 | ------------------------------ | ------------------ | ------------------ | ------------------ |
@@ -160,7 +161,7 @@ Due to the copyright issue, you need to download the dataset from official site 
 
 ### Evaluation
 
-We provide the code to evaluate some metrics presented in the paper. Some of the code is written with [`horovod`](https://github.com/horovod/horovod) to support distributed evalution and reduce the cost of inter-GPU communication, which greatly improves the speed. Check its website for a proper installation.
+We provide the code to evaluate some metrics presented in the paper. Some of the code is written with [`horovod`](https://github.com/horovod/horovod) to support distributed evaluation and reduce the cost of inter-GPU communication, which greatly improves the speed. Check its website for a proper installation.
 
 #### Fre ́chet Inception Distance (FID)
 
@@ -193,7 +194,7 @@ Similary, evaluting the PPL with:
 ```bash
 horovodrun -np N_GPU \
     python metrics/ppl.py \
-    --config anycost-ffhq-config-f 
+    --config anycost-ffhq-config-f
 ```
 
 #### Attribute Consistency
