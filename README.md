@@ -13,7 +13,7 @@ In CVPR 2021
 ![flexible](https://hanlab.mit.edu/projects/anycost-gan/images/flexible.gif)
 
 
-Inspired by quick preview features in modern rendering software, we propose Anycost GAN, an unconditional GANs acceleration method, for fast image synthesis and editing. Anycost GAN generates consistent outputs under various computational budgets.  When deployed on desktop CPUs and edge devices, our model can provide perceptually similar results at 6-12x speedup, enabling interactive editing.
+Inspired by quick preview features in modern rendering software, we propose Anycost GAN, an unconditional GANs acceleration method, for fast image synthesis and editing. Anycost GAN generates consistent outputs under various computational budgets.  When deployed on desktop CPUs and edge devices, our model can synthesize perceptually similar results with 6-12x speedup (compared to StyleGAN2), enabling interactive editing.
 
 ## Demo
 

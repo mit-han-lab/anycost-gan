@@ -117,15 +117,15 @@ def train_boundary(latent_codes,
         val_prediction = classifier.predict(val_data)
         correct_num = np.sum(val_label == val_prediction)
         print(f'Accuracy for validation set: '
-                    f'{correct_num} / {val_num * 2} = '
-                    f'{correct_num / (val_num * 2):.6f}')
+              f'{correct_num} / {val_num * 2} = '
+              f'{correct_num / (val_num * 2):.6f}')
 
     if False:  # remaining_num:  # here we skip the remaining to save time
         remaining_prediction = classifier.predict(remaining_data)
         correct_num = np.sum(remaining_label == remaining_prediction)
         print(f'Accuracy for remaining set: '
-                    f'{correct_num} / {remaining_num} = '
-                    f'{correct_num / remaining_num:.6f}')
+              f'{correct_num} / {remaining_num} = '
+              f'{correct_num / remaining_num:.6f}')
 
     a = classifier.coef_.reshape(1, latent_space_dim).astype(np.float32)
     return a / np.linalg.norm(a)
@@ -176,9 +176,9 @@ def project_boundary(primal, *args):
         primal_cond_2 = primal.dot(cond_2.T)
         cond_1_cond_2 = cond_1.dot(cond_2.T)
         alpha = (primal_cond_1 - primal_cond_2 * cond_1_cond_2) / (
-                1 - cond_1_cond_2 ** 2 + 1e-8)
+            1 - cond_1_cond_2 ** 2 + 1e-8)
         beta = (primal_cond_2 - primal_cond_1 * cond_1_cond_2) / (
-                1 - cond_1_cond_2 ** 2 + 1e-8)
+            1 - cond_1_cond_2 ** 2 + 1e-8)
         new = primal - alpha * cond_1 - beta * cond_2
         return new / np.linalg.norm(new)
 

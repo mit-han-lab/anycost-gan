@@ -69,10 +69,10 @@ def polyinterp(points, x_min_bound=None, x_max_bound=None, plot=False):
 
         if (points[0, 0] == 0):
             x_sol = -points[0, 2] * points[1, 0] ** 2 / (
-                        2 * (points[1, 1] - points[0, 1] - points[0, 2] * points[1, 0]))
+                2 * (points[1, 1] - points[0, 1] - points[0, 2] * points[1, 0]))
         else:
             a = -(points[0, 1] - points[1, 1] - points[0, 2] * (points[0, 0] - points[1, 0])) / (
-                        points[0, 0] - points[1, 0]) ** 2
+                points[0, 0] - points[1, 0]) ** 2
             x_sol = points[0, 0] - points[0, 2] / (2 * a)
 
         x_sol = np.minimum(np.maximum(x_min_bound, x_sol), x_max_bound)
@@ -87,7 +87,7 @@ def polyinterp(points, x_min_bound=None, x_max_bound=None, plot=False):
         d2 = np.sqrt(d1 ** 2 - points[0, 2] * points[1, 2])
         if np.isreal(d2):
             x_sol = points[1, 0] - (points[1, 0] - points[0, 0]) * (
-                        (points[1, 2] + d2 - d1) / (points[1, 2] - points[0, 2] + 2 * d2))
+                (points[1, 2] + d2 - d1) / (points[1, 2] - points[0, 2] + 2 * d2))
             x_sol = np.minimum(np.maximum(x_min_bound, x_sol), x_max_bound)
         else:
             x_sol = (x_max_bound + x_min_bound) / 2
