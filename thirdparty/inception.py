@@ -4,7 +4,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import models
-from utils import safe_load_state_dict_from_url
+from utils.torch_utils import safe_load_state_dict_from_url
 
 # Inception weights ported to Pytorch from
 # http://download.tensorflow.org/models/image/imagenet/inception-2015-12-05.tgz
@@ -44,21 +44,21 @@ class InceptionV3(nn.Module):
                 - 3: corresponds to output of final average pooling
         resize_input : bool
             If true, bilinearly resizes input to width and height 299 before
-            feeding input to model. As the network without fully connected
+            feeding input to models. As the network without fully connected
             layers is fully convolutional, it should be able to handle inputs
             of arbitrary size, so resizing might not be strictly needed
         normalize_input : bool
             If true, scales the input from range (0, 1) to the range the
             pretrained Inception network expects, namely (-1, 1)
         requires_grad : bool
-            If true, parameters of the model require gradients. Possibly useful
+            If true, parameters of the models require gradients. Possibly useful
             for finetuning the network
         use_fid_inception : bool
-            If true, uses the pretrained Inception model used in Tensorflow's
-            FID implementation. If false, uses the pretrained Inception model
-            available in torchvision. The FID Inception model has different
+            If true, uses the pretrained Inception models used in Tensorflow's
+            FID implementation. If false, uses the pretrained Inception models
+            available in torchvision. The FID Inception models has different
             weights and a slightly different structure from torchvision's
-            Inception model. If you want to compute FID scores, you are
+            Inception models. If you want to compute FID scores, you are
             strongly advised to set this parameter to true to get comparable
             results.
         """
@@ -162,13 +162,13 @@ class InceptionV3(nn.Module):
 
 
 def fid_inception_v3():
-    """Build pretrained Inception model for FID computation
+    """Build pretrained Inception models for FID computation
 
-    The Inception model for FID computation uses a different set of weights
+    The Inception models for FID computation uses a different set of weights
     and has a slightly different structure than torchvision's Inception.
 
     This method first constructs torchvision's Inception and then patches the
-    necessary parts that are different in the FID Inception model.
+    necessary parts that are different in the FID Inception models.
     """
     import torchvision
     inception = torchvision.models.Inception3(num_classes=1008,
@@ -302,7 +302,7 @@ class FIDInceptionE_2(models.inception.InceptionE):
         ]
         branch3x3dbl = torch.cat(branch3x3dbl, 1)
 
-        # Patch: The FID Inception model uses max pooling instead of average
+        # Patch: The FID Inception models uses max pooling instead of average
         # pooling. This is likely an error in this specific Inception
         # implementation, as other Inception models use average pooling here
         # (which matches the description in the paper).

@@ -2,8 +2,8 @@ import torch
 import numpy as np
 import os
 from PIL import Image
-from model.dynamic_channel import set_uniform_channel_ratio, reset_generator
-import model
+from models.dynamic_channel import set_uniform_channel_ratio, reset_generator
+import models
 import time
 
 import sys
@@ -109,7 +109,7 @@ class FaceEditor(QMainWindow):
             self.set_text_format(attr_label, 'right', 15)
             attr_label.move(520 - 110, 470 + i_slider * 40 + 2)
 
-        # build model sliders
+        # build models sliders
         base_h = 560
         channel_label = QLabel(self)
         channel_label.setText('channel:')
@@ -187,7 +187,7 @@ class FaceEditor(QMainWindow):
         self.anycost_resolution = 1024
 
         # build the generator
-        self.generator = model.get_pretrained('generator', config).to(device)
+        self.generator = models.get_pretrained('generator', config).to(device)
         self.generator.eval()
         self.mean_latent = self.generator.mean_style(10000)
 
@@ -213,7 +213,7 @@ class FaceEditor(QMainWindow):
             'mustache': '22_Mustache',
         }
 
-        boundaries = model.get_pretrained('boundary', config)
+        boundaries = models.get_pretrained('boundary', config)
         self.direction_dict = dict()
         for k, v in direction_map.items():
             self.direction_dict[k] = boundaries[v].view(1, 1, -1)

@@ -13,8 +13,8 @@ import math
 import sys
 
 sys.path.append('.')  # to run from the project root dir
-import model
-from utils import NativeDataset
+import models
+from utils.datasets import NativeDataset
 
 
 def extract_features():
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    inception = model.get_pretrained('inception').to(device).eval()
+    inception = models.get_pretrained('inception').to(device).eval()
     inception = nn.DataParallel(inception)
 
     transform = transforms.Compose([

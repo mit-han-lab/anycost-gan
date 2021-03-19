@@ -94,17 +94,17 @@ You can find a video recording of the demo [here](https://youtu.be/_yEziPl9AkM?t
 To get the pre-trained generator, encoder, and editing directions, run:
 
 ```python
-import model
+import models
 
 pretrained_type = 'generator'  # choosing from ['generator', 'encoder', 'boundary']
 config_name = 'anycost-ffhq-config-f'  # replace the config name for other models
-model.get_pretrained(pretrained_type, config=config_name)
+models.get_pretrained(pretrained_type, config=config_name)
 ```
 
 We also provide the face attribute classifier (which is general for different generators) for computing the editing directions. You can get it by running:
 
 ```python
-model.get_pretrained('attribute-predictor')
+models.get_pretrained('attribute-predictor')
 ```
 
 The attribute classifier takes in the face images in FFHQ format.
@@ -114,9 +114,9 @@ The attribute classifier takes in the face images in FFHQ format.
 After loading the Anycost generator, we can run it at a wide range of computational costs. For example:
 
 ```python
-from model.dynamic_channel import set_uniform_channel_ratio, reset_generator
+from models.dynamic_channel import set_uniform_channel_ratio, reset_generator
 
-g = model.get_pretrained('generator', config='anycost-ffhq-config-f')  # anycost uniform
+g = models.get_pretrained('generator', config='anycost-ffhq-config-f')  # anycost uniform
 set_uniform_channel_ratio(g, 0.5)  # set channel
 g.target_res = 512  # set resolution
 out, _ = g(...)  # generate image
@@ -223,7 +223,35 @@ python metrics/eval_encoder.py \
 
 ### Training
 
-The training code will be updated shortly.
+We provide the scripts to train Anycost GAN on FFHQ dataset.
+
+- Training the original StyleGAN2 on FFHQ
+
+```
+horovodrun -np 8 bash scripts/train_stylegan2_ffhq.sh
+```
+
+The training of original StyleGAN2 is time-consuming. We recommend downloading the converted checkpoints from [here](https://www.dropbox.com/sh/l8g9amoduz99kjh/AAAY9LYZk2CnsO43ywDrLZpEa?dl=0) and place it under `checkpoint/`.
+
+- Training Anycost GAN: mult-resolution 
+
+```
+horovodrun -np 8 bash scripts/train_stylegan2_multires_ffhq.sh
+```
+
+Note that after each epoch, we evaluate the FIDs of two resolutions (1024&512) to better monitor the training progress. We also apply distillation to accelearte the convergence, which is not used for the ablation in the paper.
+
+- Training Anycost GAN: adaptive-channel
+
+```
+horovodrun -np 8 bash scripts/train_stylegan2_multires_adach_ffhq.sh
+```
+
+Here we set a longer training epoch for a more stable reproduction, which might not be necessary (depending on the randomness).
+
+
+
+**Note**: We trained our models on Titan RTX GPUs with 24GB memory. For GPUs with smaller memory, you may need to reduce the resolution/model size/batch size/etc. and adjust other hyper-parameters accordingly.
 
 
 

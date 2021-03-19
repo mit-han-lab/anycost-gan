@@ -6,14 +6,14 @@ import argparse
 import torch
 import torch.nn as nn
 from tqdm import tqdm
-import model
-from utils import adaptive_resize
+import models
+from utils.torch_utils import adaptive_resize
 from thirdparty.celeba_hq_split import get_celeba_hq_split
 from torchvision import transforms
 import lpips
-from utils import AverageMeter
-from model.dynamic_channel import set_uniform_channel_ratio, remove_sub_channel_config
-from utils import NativeDataset
+from utils.torch_utils import AverageMeter
+from models.dynamic_channel import set_uniform_channel_ratio, remove_sub_channel_config
+from utils.datasets import NativeDataset
 
 
 def validate():
@@ -89,10 +89,10 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # build models
-    generator = model.get_pretrained('generator', args.config).to(device)
+    generator = models.get_pretrained('generator', args.config).to(device)
     generator.eval()
 
-    encoder = model.get_pretrained('encoder', args.config).to(device)
+    encoder = models.get_pretrained('encoder', args.config).to(device)
     encoder.eval()
 
     # build test dataset

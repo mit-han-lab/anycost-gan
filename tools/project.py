@@ -16,10 +16,10 @@ import lpips
 import sys
 sys.path.append('.')  # to run from the project root dir
 
-import model
+import models
 from thirdparty import LBFGS
-from model.dynamic_channel import CHANNEL_CONFIGS, set_uniform_channel_ratio, reset_generator, set_sub_channel_config
-from utils import adaptive_resize
+from models.dynamic_channel import CHANNEL_CONFIGS, set_uniform_channel_ratio, reset_generator, set_sub_channel_config
+from utils.torch_utils import adaptive_resize
 
 torch.backends.cudnn.benchmark = False
 
@@ -147,7 +147,7 @@ if __name__ == "__main__":
     device = "cuda"
 
     parser = argparse.ArgumentParser(description="Image projector to the generator latent spaces")
-    parser.add_argument("--config", type=str, default='anycost-ffhq-config-f', help="model config")
+    parser.add_argument("--config", type=str, default='anycost-ffhq-config-f', help="models config")
     parser.add_argument("--encoder", action="store_true", help="use encoder prediction as init")
     parser.add_argument("--optimizer", type=str, default='lbfgs', help="optimizer used")
     parser.add_argument("--n_iter", type=int, default=100, help="optimize iterations")
@@ -163,11 +163,11 @@ if __name__ == "__main__":
     n_mean_latent = 10000
 
     # build generator to project
-    generator = model.get_pretrained('generator', args.config).to(device)
+    generator = models.get_pretrained('generator', args.config).to(device)
 
     generator.eval()
     if args.encoder:
-        encoder = model.get_pretrained('encoder', args.config).to(device)
+        encoder = models.get_pretrained('encoder', args.config).to(device)
         encoder.eval()
     else:
         encoder = None

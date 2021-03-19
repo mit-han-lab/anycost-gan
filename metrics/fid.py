@@ -7,7 +7,7 @@ import torch
 import numpy as np
 from scipy import linalg
 from tqdm import tqdm
-import model
+import models
 
 
 def calc_fid(sample_mean, sample_cov, real_mean, real_cov, eps=1e-6):
@@ -79,12 +79,12 @@ if __name__ == '__main__':
     hvd.init()
     torch.cuda.set_device(hvd.local_rank())
 
-    generator = model.get_pretrained('generator', args.config).to(device)
+    generator = models.get_pretrained('generator', args.config).to(device)
     generator.eval()
 
     # set sub-generator
     if args.channel_ratio:
-        from model.dynamic_channel import set_uniform_channel_ratio, CHANNEL_CONFIGS
+        from models.dynamic_channel import set_uniform_channel_ratio, CHANNEL_CONFIGS
 
         assert args.channel_ratio in CHANNEL_CONFIGS
         set_uniform_channel_ratio(generator, args.channel_ratio)
@@ -103,7 +103,7 @@ if __name__ == '__main__':
         except:
             print(' * Profiling failed. Passed.')
 
-    inception = model.get_pretrained('inception').to(device)
+    inception = models.get_pretrained('inception').to(device)
     inception.eval()
 
     inception_features = extract_feature_from_samples()

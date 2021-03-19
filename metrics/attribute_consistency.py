@@ -5,13 +5,13 @@ import argparse
 import math
 import torch
 from tqdm import tqdm
-import model
+import models
 import horovod.torch as hvd
-from utils import adaptive_resize
+from utils.torch_utils import adaptive_resize
 
 
 def compute_attribute_consistency(g, sub_g, n_sample, batch_size):
-    attr_pred = model.get_pretrained('attribute-predictor').to(device)
+    attr_pred = models.get_pretrained('attribute-predictor').to(device)
     attr_pred.eval()
 
     n_batch = math.ceil(n_sample * 1. / batch_size / hvd.size())
@@ -56,11 +56,11 @@ if __name__ == "__main__":
     hvd.init()
     torch.cuda.set_device(hvd.local_rank())
 
-    generator = model.get_pretrained('generator', args.config).to(device).eval()
+    generator = models.get_pretrained('generator', args.config).to(device).eval()
 
-    sub_generator = model.get_pretrained('generator', args.config).to(device).eval()
+    sub_generator = models.get_pretrained('generator', args.config).to(device).eval()
     if args.channel_ratio:
-        from model.dynamic_channel import set_uniform_channel_ratio
+        from models.dynamic_channel import set_uniform_channel_ratio
         set_uniform_channel_ratio(sub_generator, args.channel_ratio)
 
     if args.target_res is not None:

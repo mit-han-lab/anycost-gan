@@ -8,7 +8,7 @@ import torch
 import numpy as np
 from tqdm import tqdm
 import lpips
-import model
+import models
 import horovod.torch as hvd
 
 
@@ -108,11 +108,11 @@ if __name__ == "__main__":
     hvd.init()
     torch.cuda.set_device(hvd.local_rank())
 
-    generator = model.get_pretrained('generator', args.config).to(device)
+    generator = models.get_pretrained('generator', args.config).to(device)
     generator.eval()
 
     if args.channel_ratio:
-        from model.dynamic_channel import set_uniform_channel_ratio
+        from models.dynamic_channel import set_uniform_channel_ratio
         set_uniform_channel_ratio(generator, args.channel_ratio)
 
     if args.target_res is not None:

@@ -11,7 +11,7 @@ requirements:
     apt install cmake
     conda install Pillow numpy scipy
     pip install dlib
-    # download face landmark model from:
+    # download face landmark models from:
     # http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 """
 import os
@@ -23,7 +23,7 @@ import scipy
 import scipy.ndimage
 import dlib  # pip install dlib if not found
 
-# download model from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
+# download models from: http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2
 predictor = dlib.shape_predictor('./shape_predictor_68_face_landmarks.dat')
 
 

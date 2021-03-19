@@ -1,0 +1,11 @@
+python tools/train_gan.py \
+    --job anycost-multires_ffhq-1024_distill \
+    --data_path /dataset/ffhq/images-wrap --resume \
+    --channel_multiplier 2 --resolution 1024 \
+    --lr 0.002 --epochs 20 --batch_size 4 -j 2 \
+    --fid_n_sample 50000 --fid_batch_size 8 \
+    --inception_path assets/inceptions/inception_ffhq_res1024_50k.pkl,assets/inceptions/inception_ffhq_res512_50k.pkl \
+    --n_res 4 --n_sampled_res 2 \
+    --g_reg_every -1 \
+    --tune_from checkpoint/stylegan2-ffhq-config-f.pt \
+    --teacher_ckpt checkpoint/stylegan2-ffhq-config-f.pt

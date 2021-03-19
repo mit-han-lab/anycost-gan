@@ -433,7 +433,7 @@ class LBFGS(Optimizer):
             options (dict): contains options for performing line search
 
         Options for Armijo backtracking line search:
-            'closure' (callable): reevaluates model and returns function value
+            'closure' (callable): reevaluates models and returns function value
             'current_loss' (tensor): objective value at current iterate (default: F(x_k))
             'gtd' (tensor): inner product g_Ok'd in line search (default: g_Ok'd)
             'eta' (tensor): factor for decreasing steplength > 0 (default: 2)
@@ -444,7 +444,7 @@ class LBFGS(Optimizer):
             'ls_debug' (bool): debugging mode for line search
 
         Options for Wolfe line search:
-            'closure' (callable): reevaluates model and returns function value
+            'closure' (callable): reevaluates models and returns function value
             'current_loss' (tensor): objective value at current iterate (default: F(x_k))
             'gtd' (tensor): inner product g_Ok'd in line search (default: g_Ok'd)
             'eta' (float): factor for extrapolation (default: 2)
@@ -1027,7 +1027,7 @@ class FullBatchLBFGS(LBFGS):
             'damping' (bool): flag for using Powell damping (default: False)
 
         Options for Armijo backtracking line search:
-            'closure' (callable): reevaluates model and returns function value
+            'closure' (callable): reevaluates models and returns function value
             'current_loss' (tensor): objective value at current iterate (default: F(x_k))
             'gtd' (tensor): inner product g_Ok'd in line search (default: g_Ok'd)
             'eta' (tensor): factor for decreasing steplength > 0 (default: 2)
@@ -1038,7 +1038,7 @@ class FullBatchLBFGS(LBFGS):
             'ls_debug' (bool): debugging mode for line search
 
         Options for Wolfe line search:
-            'closure' (callable): reevaluates model and returns function value
+            'closure' (callable): reevaluates models and returns function value
             'current_loss' (tensor): objective value at current iterate (default: F(x_k))
             'gtd' (tensor): inner product g_Ok'd in line search (default: g_Ok'd)
             'eta' (float): factor for extrapolation (default: 2)

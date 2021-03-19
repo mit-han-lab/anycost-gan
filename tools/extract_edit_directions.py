@@ -1,9 +1,9 @@
-# get edit directions for FFHQ model
+# get edit directions for FFHQ models
 import sys
 sys.path.append('.')  # to run from the project root dir
 import torch
 import torch.nn.functional as F
-import model
+import models
 from tqdm import tqdm
 
 # configurations for the job
@@ -29,9 +29,9 @@ def get_style_attribute_pairs():  # this function is written with horovod to acc
     if hvd.rank() == 0:
         print(' * Extracting style-attribute pairs...')
     # build and load the pre-trained attribute predictor on CelebA-HQ
-    predictor = model.get_pretrained('attribute-predictor').to(device)
+    predictor = models.get_pretrained('attribute-predictor').to(device)
     # build and load the pre-trained anycost generator
-    generator = model.get_pretrained('generator', config).to(device)
+    generator = models.get_pretrained('generator', config).to(device)
 
     predictor.eval()
     generator.eval()
