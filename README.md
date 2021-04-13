@@ -85,6 +85,11 @@ We provide an interactive demo showing how we can use anycost GAN to enable inte
 python demo.py
 ```
 
+If your computer contains a CUDA GPU, try running with:
+```bash
+FORCE_NATIVE=1 python demo.py
+```
+
 You can find a video recording of the demo [here](https://youtu.be/_yEziPl9AkM?t=90).
 
 
