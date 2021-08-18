@@ -283,6 +283,6 @@ If you use this code for your research, please cite our paper.
 
 ## Acknowledgement
 
-We thank Taesung Park, Zhixin Shu, Muyang Li, and Han Cai for the helpful discussion. Part of the work is supported by NSF CAREER Award #1943349, Adobe, Naver Corporation, and MIT-IBM Watson AI Lab.
+We thank Taesung Park, Zhixin Shu, Muyang Li, and Han Cai for the helpful discussion. Part of the work is supported by NSF CAREER Award #1943349, Adobe, SONY, Naver Corporation, and MIT-IBM Watson AI Lab.
 
 The codebase is build upon a PyTorch implementation of StyleGAN2: [rosinality/stylegan2-pytorch](https://github.com/rosinality/stylegan2-pytorch). For editing direction extraction, we refer to [InterFaceGAN](https://github.com/genforce/interfacegan).
