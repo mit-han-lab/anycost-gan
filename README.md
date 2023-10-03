@@ -1,6 +1,6 @@
 # Anycost GAN
 
-### [video](https://youtu.be/_yEziPl9AkM) | [paper](https://arxiv.org/abs/2103.03243) | [website](https://hanlab.mit.edu/projects/anycost-gan/) [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mit-han-lab/anycost-gan/blob/master/notebooks/intro_colab.ipynb)
+### [video](https://youtu.be/_yEziPl9AkM) | [paper](https://arxiv.org/abs/2103.03243) | [website](https://hanlab18.mit.edu/projects/anycost-gan/) [![](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/mit-han-lab/anycost-gan/blob/master/notebooks/intro_colab.ipynb)
 
 [Anycost GANs for Interactive Image Synthesis and Editing](https://arxiv.org/abs/2103.03243)
 
@@ -10,7 +10,7 @@ MIT, Adobe Research, CMU
 
 In CVPR 2021
 
-![flexible](https://hanlab.mit.edu/projects/anycost-gan/images/flexible.gif)
+![flexible](https://hanlab18.mit.edu/projects/anycost-gan/images/flexible.gif)
 
 Anycost GAN generates consistent outputs under various computational budgets.
 
@@ -28,27 +28,27 @@ Here, we can use the Anycost generator for **interactive image editing**. A full
 
 Anycost generators can be run at *diverse computation costs* by using different *channel* and *resolution* configurations. Sub-generators achieve high output consistency compared to the full generator, providing a fast preview.
 
-![overview](https://hanlab.mit.edu/projects/anycost-gan/images/overall.jpg)
+![overview](https://hanlab18.mit.edu/projects/anycost-gan/images/overall.jpg)
 
 
 
 With (1) Sampling-based multi-resolution training, (2) adaptive-channel training, and (3) generator-conditioned discriminator, we achieve high image quality and consistency at different resolutions and channels.
 
-![method](https://hanlab.mit.edu/projects/anycost-gan/images/method_pad.gif)
+![method](https://hanlab18.mit.edu/projects/anycost-gan/images/method_pad.gif)
 
 ## Results
 
 Anycost GAN (uniform channel version) supports 4 resolutions and 4 channel ratios, producing visually consistent images with different image fidelity.
 
-![uniform](https://hanlab.mit.edu/projects/anycost-gan/images/uniform.gif)
+![uniform](https://hanlab18.mit.edu/projects/anycost-gan/images/uniform.gif)
 
 
 
 The consistency retains during image projection and editing:
 
-![](https://hanlab.mit.edu/projects/anycost-gan/images/teaser.jpg)
+![](https://hanlab18.mit.edu/projects/anycost-gan/images/teaser.jpg)
 
-![](https://hanlab.mit.edu/projects/anycost-gan/images/editing.jpg)
+![](https://hanlab18.mit.edu/projects/anycost-gan/images/editing.jpg)
 
 
 

@@ -3,7 +3,7 @@ import torch
 from torchvision import models
 from utils.torch_utils import safe_load_state_dict_from_url
 
-URL_TEMPLATE = 'https://hanlab.mit.edu/projects/anycost-gan/files/{}_{}.pt'
+URL_TEMPLATE = 'https://hanlab18.mit.edu/projects/anycost-gan/files/{}_{}.pt'
 
 
 def load_state_dict_from_url(url, key=None):
